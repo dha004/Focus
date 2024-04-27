@@ -2,100 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Focus</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .container {
-            text-align: center;
-            padding: 40px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        h1 {
-            color: #333;
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-
-        p {
-            color: #666;
-            font-size: 1.2rem;
-            line-height: 1.5;
-            margin-bottom: 30px;
-        }
-
-        .button-container {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        button {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            padding: 10px 20px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        .calibration-point {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: red;
-            border-radius: 50%;
-            cursor: pointer;
-            transform: translate(-50%, -50%);
-        }
-
-        #gazeData {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            color: #007bff;
-        }
-    </style>
-    <script src="https://webgazer.cs.brown.edu/webgazer.js"></script>
+    <meta viewport="width=device-width, initial-scale=1.0">
+    <title>Welcome to Our Application</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>Distraction-Free Learning Tools</h1>
-        <p>This website provides all the tools you'll need to minimize distractions while studying.</p>
-        <div class="button-container">
-            <button id="started">Getting Started</button>
-            <button onclick="learnMore()">Learn More</button>
-        </div>
-        <div id="gazeData">Watching your gaze...</div>
+        <h1>Welcome to Our Application</h1>
+        <p>Click below to choose your function:</p>
+        <a href="functions.html" class="button">Getting Started</a>
     </div>
-
-    <!-- Calibration points -->
-    <div class="calibration-point" style="top: 50%; left: 50%;"></div> <!-- Center point -->
-    <div class="calibration-point" style="top: 5%; left: 5%;"></div> <!-- Top-left corner -->
-    <div class="calibration-point" style="top: 5%; left: 95%;"></div> <!-- Top-right corner -->
-    <div class="calibration-point" style="top: 95%; left: 5%;"></div> <!-- Bottom-left corner -->
-    <div class="calibration-point" style="top: 95%; left: 95%;"></div> <!-- Bottom-right corner -->
-
-    <script src="script.js"></script>
-    <script src="eyeTracking.js"></script>
 </body>
 </html>
