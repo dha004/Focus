@@ -1,3 +1,8 @@
+document.getElementById("started").addEventListener("click", function () {
+    document.querySelector('h1').textContent = "Let's Get Started!";
+    document.querySelector('p').textContent = "Here are some steps to begin your learning journey:";
+});
+
 document.addEventListener('DOMContentLoaded', function () {
     const startButton = document.getElementById('start-timer');
     const timerDisplay = document.getElementById('timer');
@@ -65,3 +70,4 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+
