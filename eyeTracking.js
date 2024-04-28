@@ -1,50 +1,78 @@
-// Function to initialize and start the eye tracker
-function startEyeTracker() {
-    // Setting up WebGazer
-    webgazer.setGazeListener(function(data, elapsedTime) {
-        if (data === null) {
-            return; // No data received
-        }
-        var x = data.x; // x coordinate of gaze
-        var y = data.y; // y coordinate of gaze
+document.addEventListener('DOMContentLoaded', function() {
+    let userOutOfFrame = false;
 
-        // Update some display element with the current gaze position
-        document.getElementById('gazeData').textContent = `Gaze Position: X=${x.toFixed(2)}, Y=${y.toFixed(2)}`;
+    function playMusic(){
+        let audio = new Audio("beeping.mp3");
+        audio.play()
+    }
+
+    function alertUser() {
+        if (!userOutOfFrame) {  // Only show alert if user was previously in frame
+            alert("You are out of frame!");
+            userOutOfFrame = true;  // Set flag to true as user is out of frame
+        }
+    }
+
+    function startEyeTracker() {
+        webgazer.setGazeListener(function(data, elapsedTime) {
+            console.log("Received gaze data:", data);  // Log all data received
+
+            if (!data || data.x === undefined || data.y === undefined) {  // Check for undefined data
+                console.log("Data is undefined, user may be out of frame.");  // Specific log for undefined data
+                if (!userOutOfFrame) {
+                    alert("You are out of frame!");
+                    userOutOfFrame = true;
+                }
+            } else {
+                if (userOutOfFrame) {
+                    userOutOfFrame = false;
+                    console.log("User is back in frame.");  // Log when the user returns to frame
+                }
+                document.getElementById('gazeData').textContent = `Gaze Position: X=${data.x.toFixed(2)}, Y=${data.y.toFixed(2)}`;
+            }
+        }).begin();
+    }
+
+        // Show buttons for calibration actions
+        document.getElementById('start-calibration').classList.remove('hidden');
+        document.getElementById('clear-calibration-dots').classList.remove('hidden');
+        document.getElementById('reset-calibration').classList.remove('hidden');
         
-        // Optionally, handle off-screen gaze detection
-        if (x < 0 || x > window.innerWidth || y < 0 || y > window.innerHeight) {
-            console.log('Gaze is off-screen');
+    function setupCalibrationPoints() {
+        const calibrationArea = document.getElementById('calibration-area');
+        calibrationArea.classList.remove('hidden');
+        // Ensure event listeners are set up only once
+        if (!calibrationArea.dataset.listenersAdded) {
+            document.querySelectorAll('.calibration-point').forEach(point => {
+                point.addEventListener('click', function(e) {
+                    webgazer.addCalibrationPoint(e.clientX, e.clientY);
+                    console.log(`Calibration point added at (${e.clientX}, ${e.clientY})`);
+                });
+            });
+            calibrationArea.dataset.listenersAdded = 'true';
         }
-    }).begin();
+    }
 
-    // These settings are optional and can be adjusted based on your needs
-    webgazer.showVideoPreview(true) // Show video preview of the user
-           .showPredictionPoints(true) // Show where the model predicts you are looking
-           .applyKalmanFilter(true); // Use Kalman Filter to smooth the predictions
+    function clearCalibrationDots() {
+        const calibrationArea = document.getElementById('calibration-area');
+        calibrationArea.classList.add('hidden');
+        webgazer.clearData();
+        console.log('Calibration dots cleared');
+    }
 
-    // Ensure the eye tracker is ready and calibrated
-    webgazer.ensureWebcamAccess().then(function() {
-        console.log("Webcam access allowed");
-    });
+    function resetCalibration() {
+        const calibrationArea = document.getElementById('calibration-area');
+        webgazer.clearData();
+        calibrationArea.classList.remove('hidden');
+        console.log('Calibration reset');
+        // Re-enable clicking on calibration points after reset
+        calibrationArea.dataset.listenersAdded = 'false';
+        setupCalibrationPoints();
+    }
 
-    // Calibration is usually needed for accurate tracking
-    setupCalibrationPoints();
-}
+    document.getElementById('start-calibration').addEventListener('click', setupCalibrationPoints);
+    document.getElementById('clear-calibration-dots').addEventListener('click', clearCalibrationDots);
+    document.getElementById('reset-calibration').addEventListener('click', resetCalibration);
 
-// Function to set up calibration points on the screen
-function setupCalibrationPoints() {
-    const points = document.querySelectorAll('.calibration-point');
-    points.forEach(point => {
-        point.addEventListener('click', function(e) {
-            // Add calibration point at the click location
-            webgazer.addCalibrationPoint(e.clientX, e.clientY);
-            console.log(`Calibration point added at (${e.clientX}, ${e.clientY})`);
-        });
-    });
-}
-
-// Make the start function accessible globally
-window.startEyeTracker = startEyeTracker;
-
-// If you want to start eye tracking automatically when the page loads, you can uncomment this line
-// document.addEventListener('DOMContentLoaded', startEyeTracker);
+    document.getElementById('start-eye-tracker').addEventListener('click', startEyeTracker);
+});
