@@ -1,23 +1,34 @@
-<!-- functions.html -->
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta viewport="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Choose Function</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://webgazer.cs.brown.edu/webgazer.js"></script>
 </head>
-
 <body>
     <div class="container">
         <h1>Choose a Function</h1>
-        <button id="start-timer">Timer </button>
-        <button id="start-eye-tracker">Eye Tracker </button>
+        <p>Text</p>
+        <button id="start-timer">Timer Function</button>
+        <button id="start-eye-tracker">Eye Tracker Function</button>
+        <button id="start-calibration" class="hidden">Start Calibration</button>
+        <button id="clear-calibration-dots" class="hidden">Clear Calibration Dots</button>
+        <button id="reset-calibration" class="hidden">Reset Calibration</button>
+        <div id="calibration-area" class="hidden">
+            <div class="calibration-point" style="position: fixed; top: 20%; left: 20%; color: red;">+</div>
+            <div class="calibration-point" style="position: fixed; top: 20%; right: 20%; color: red;">+</div>
+            <div class="calibration-point" style="position: fixed; top: 50%; left: 50%; color: red;">+</div>
+            <div class="calibration-point" style="position: fixed; bottom: 20%; left: 20%; color: red;">+</div>
+            <div class="calibration-point" style="position: fixed; bottom: 20%; right: 20%; color: red;">+</div>
+        </div>
+        <div id="gazeData" class="hidden">Watching your gaze...</div>
     </div>
 
-    <script src="script.js"></script>
-</body>
+    <script src="script.js" defer></script>
+    <script src="timer.js" defer></script>
+    <script src="eyeTracking.js" defer></script>
 
+</body>
 </html>
