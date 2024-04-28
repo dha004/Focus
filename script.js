@@ -1,10 +1,4 @@
-console.log("executing script.js:")
-// document.getElementById("started").addEventListener("click", function () {
-//     document.querySelector('h1').textContent = "Let's Get Started!";
-//     document.querySelector('p').textContent = "Choose an option to begin your focused learning session:";
-//     document.getElementById('function-options').classList.toggle('hidden');
-//     document.getElementById('gazeData').classList.add('hidden'); // Hide gaze data initially
-// });
+console.log("Executing script.js:");
 
 document.getElementById("start-timer").addEventListener("click", function () {
     document.querySelector('h1').textContent = "Timer Function Activated!";
@@ -14,7 +8,7 @@ document.getElementById("start-timer").addEventListener("click", function () {
 });
 
 document.getElementById("start-eye-tracker").addEventListener("click", function () {
-    console.log("activated functions")
+    console.log("Eye Tracker Activated!");
     document.querySelector('h1').textContent = "Eye Tracker Activated!";
     document.querySelector('p').textContent = "Please calibrate the eye tracker by following the on-screen instructions.";
     startEyeTracker();
