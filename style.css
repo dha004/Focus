@@ -1,65 +1,85 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
+    font-family: 'Times New Roman', sans-serif;
+    background: linear-gradient(135deg, #8a2be2 0%, #3434b3 100%);
+    color: #ffdd00;
     margin: 0;
-    padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    overflow: hidden;
+    position: relative;
+    /* Position relative for absolute positioning */
 }
 
 .container {
     text-align: center;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    /* Ensure the container serves as the reference point for absolute positioning */
+}
+
+img {
+    position: fixed;
+    /* Position the image fixed to the viewport */
+    bottom: 20px;
+    /* Distance from the bottom of the viewport */
+    right: 20px;
+    /* Distance from the right of the viewport */
+    z-index: 9999;
+    /* Ensure the image appears above other content */
+    width: 400px;
+    height: 400px;
 }
 
 h1 {
-    color: #333;
+    color: #ffdd00;
+    /* Yellow text for headers */
+    margin-bottom: 20px;
+    text-align: center;
+    /* Center-align the text */
 }
 
 p {
-    color: #666;
+    color: #ffdd00;
+    /* Yellow text for paragraphs */
+    line-height: 1.6;
+    text-align: center;
+    /* Center-align the text */
 }
 
-.button, button {
+input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    /* Light grey border for definition */
+    border-radius: 4px;
+    background-color: transparent;
+    /* Make background transparent */
+    color: #ffdd00;
+    /* Yellow text for visibility */
+    font-size: 68px;
+}
+
+.button,
+button {
     background-color: #007bff;
+    /* Primary button color */
     color: #ffffff;
+    /* White text on buttons */
     border: none;
-    padding: 10px 20px;
-    text-decoration: none;
-    font-size: 16px;
-    border-radius: 5px;
+    padding: 12px 24px;
+    font-size: 18px;
+    border-radius: 8px;
     cursor: pointer;
+    transition: background-color 0.3s;
+    outline: none;
 }
 
-.button:hover, button:hover {
+.button:hover,
+button:hover {
     background-color: #0056b3;
+    opacity: 0.8;
+    width: 150px;
+    height: 150px;
 }
-
-.hidden {
-    display: none;
-}
-
-.calibration-point {
-    display: block;
-    width: 20px;
-    height: 20px;
-    background-color: red;
-    border-radius: 50%;
-    position: fixed; /* Ensure they are fixed in the viewport */
-    color: white;
-    cursor: pointer; /* Indicates clickable items */
-    z-index: 1000; /* Ensure they are above other elements */
-}
-
-#timer-display {
-    font-size: 24px;
-    margin-top: 20px;
-}
-
-
 
